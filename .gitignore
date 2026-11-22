@@ -5,3 +5,21 @@
 /public/hot
 /storage/*.key
 .phpunit.result.cache
+
+# Laravel runtime files
+/bootstrap/cache/*.php
+!/bootstrap/cache/.gitkeep
+
+/storage/framework/cache/data/*
+!/storage/framework/cache/data/.gitignore
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitignore
+/storage/framework/views/*
+!/storage/framework/views/.gitignore
+/storage/framework/testing/*
+/storage/logs/*
+!/storage/logs/.gitkeep
+
+# Local SQLite database
+/database/*.sqlite
+/database/*.sqlite-journal
