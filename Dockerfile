@@ -13,6 +13,8 @@ ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 
 RUN sed -ri 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
     /etc/apache2/sites-available/000-default.conf \
+    && sed -ri 's!/var/www/!${APACHE_DOCUMENT_ROOT}/!g' \
+    /etc/apache2/apache2.conf \
     && sed -i 's/Listen 80/Listen 10000/' /etc/apache2/ports.conf \
     && sed -i 's/:80>/:10000>/' /etc/apache2/sites-available/000-default.conf
 
@@ -22,7 +24,9 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN chown -R www-data:www-data storage bootstrap/cache
+RUN mkdir -p database \
+    && touch database/database.sqlite \
+    && chown -R www-data:www-data storage bootstrap/cache database
 
 EXPOSE 10000
 
