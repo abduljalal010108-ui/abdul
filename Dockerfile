@@ -29,5 +29,4 @@ RUN mkdir -p database \
     && chown -R www-data:www-data storage bootstrap/cache database
 
 EXPOSE 10000
-
-CMD ["apache2-foreground"]
+CMD ["sh", "-c", "php artisan migrate --force && php artisan db:seed --force && apache2-foreground"]
